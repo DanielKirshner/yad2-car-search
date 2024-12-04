@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 import time
 import json
 
@@ -50,26 +51,26 @@ class Yad2CarAPI:
         time.sleep(1)
         products = { }
         while not done:
-            result_list = self.driver.find_elements_by_class_name('feeditem')
+            result_list = self.driver.find_elements(By.CLASS_NAME, 'feeditem')  # Updated for Selenium 4
             for element in result_list:
                 try:
                     element.click()
                     time.sleep(3)
-                    feed = element.find_element_by_xpath('.//div')
+                    feed = element.find_element(By.XPATH, './/div')  # Updated for Selenium 4
                     id = feed.get_attribute('id').split('_')[2]
-                    feed2 = self.driver.find_element_by_id(f'accordion_wide_{id}').find_element_by_id('share_item_new-tab').find_element_by_xpath('.//a')
+                    feed2 = self.driver.find_element(By.ID, f'accordion_wide_{id}').find_element(By.ID, 'share_item_new-tab').find_element(By.XPATH, './/a')  # Updated for Selenium 4
                     link = feed2.get_attribute('href')
-                    title = feed.find_element_by_class_name('title').text
-                    year = feed.find_element_by_id(f'data_year_{id}').text
-                    hand = feed.find_element_by_id(f'data_hand_{id}').text
-                    price = feed.find_element_by_id(f'feed_item_{id}_price').text
-                    engine_size = feed.find_element_by_id(f'data_engine_size_{id}').text
-                    location = feed.find_element_by_class_name('upper_info_text').text
-                    subtitle = ' '.join(feed.find_element_by_class_name('subtitle').text.split(' ')[1:4])
-                    color = feed.find_element_by_id('more_details_color').find_element_by_xpath('.//span').text
-                    owner = feed.find_element_by_id('more_details_ownerID').find_element_by_xpath('.//span').text
-                    kilometer = feed.find_element_by_id('more_details_kilometers').find_element_by_xpath('.//span').text
-                    detail = feed.find_element_by_class_name('details_text').text
+                    title = feed.find_element(By.CLASS_NAME, 'title').text  # Updated for Selenium 4
+                    year = feed.find_element(By.ID, f'data_year_{id}').text  # Updated for Selenium 4
+                    hand = feed.find_element(By.ID, f'data_hand_{id}').text  # Updated for Selenium 4
+                    price = feed.find_element(By.ID, f'feed_item_{id}_price').text  # Updated for Selenium 4
+                    engine_size = feed.find_element(By.ID, f'data_engine_size_{id}').text  # Updated for Selenium 4
+                    location = feed.find_element(By.CLASS_NAME, 'upper_info_text').text  # Updated for Selenium 4
+                    subtitle = ' '.join(feed.find_element(By.CLASS_NAME, 'subtitle').text.split(' ')[1:4])  # Updated for Selenium 4
+                    color = feed.find_element(By.ID, 'more_details_color').find_element(By.XPATH, './/span').text  # Updated for Selenium 4
+                    owner = feed.find_element(By.ID, 'more_details_ownerID').find_element(By.XPATH, './/span').text  # Updated for Selenium 4
+                    kilometer = feed.find_element(By.ID, 'more_details_kilometers').find_element(By.XPATH, './/span').text  # Updated for Selenium 4
+                    detail = feed.find_element(By.CLASS_NAME, 'details_text').text  # Updated for Selenium 4
                     # on_road = feed.find_element_by_id('more_details_month').find_element_by_xpath('.//span').text
                     # test = feed.find_element_by_id('more_details_testDate').find_element_by_xpath('.//span').text
                     p = [{
@@ -96,7 +97,7 @@ class Yad2CarAPI:
                     print(e)
                     pass
             try:    
-                nextButon = self.driver.find_element_by_xpath('//*[@id="__layout"]/div/main/div/div[4]/div[6]/div[2]/div[4]/a[2]')
+                nextButon = self.driver.find_element(By.XPATH, '//*[@id="__layout"]/div/main/div/div[4]/div[6]/div[2]/div[4]/a[2]')  # Updated for Selenium 4
                 nextPage = nextButon.get_attribute('href')
                 if nextPage == self.driver.current_url:
                     done = True

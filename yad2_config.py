@@ -70,11 +70,20 @@ FILTERS = {
 BASE_URL = "https://www.yad2.co.il/vehicles/private-cars"
 
 def get_chrome_web_driver(options):
-    return webdriver.Chrome("./chromedriver", chrome_options=options)
+    return webdriver.Chrome(options)
 
 
 def get_web_driver_options():
-    return webdriver.ChromeOptions()
+    options = webdriver.ChromeOptions()
+    options.add_argument("--window-size=1920,1080")
+    options.add_argument("--disable-usb-devices")
+    # options.add_argument("--headless")
+    # options.add_argument("--disable-gpu")
+    # options.add_argument("--no-sandbox") 
+    # options.add_argument("--disable-dev-shm-usage")
+    # options.add_argument("--enable-unsafe-swiftshader")
+    options.add_argument("--user-agent=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\"")
+    return options
 
 
 def set_ignore_certificate_error(options):
