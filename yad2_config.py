@@ -117,7 +117,7 @@ def get_area(area):
 
 def get_areas(areas):
     a = ','.join(list(map(get_area, areas)))
-    return f'area={a}'
+    return f'topArea={a}'
 
 def get_gear(gear):
     return GEAR_SN[gear]
